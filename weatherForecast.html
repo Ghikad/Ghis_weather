@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/weather-icons.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Weather Forecast</title> 
+
+    <!--Code CSS pour avoir les couleurs blanches sur l'UI-->
+    <style>
+        .container{
+            color: white;
+            background-color: rgb(3, 3, 53);
+            
+        }
+        a{
+            color: white;
+            text-decoration: white;
+        }
+    </style>
+     <script>
+
+        /*  Dark and light mode*/
+
+        var actual_date = new Date();
+        var hour = actual_date.getHours();
+        var container = document.getElementsByClassName('container');
+
+        if(hour > 17 || hour < 7){
+
+            container.className += 'dark';
+
+        }
+    </script>
+
+</head>
+<body>
+
+    <div class="container mt-5 mb-5 pt-5">
+
+        <!--Intégration de deux grille pour les barres du menu et l'en tête-->
+        <div class="row">
+            <div id="menu" class= "col-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-filter-left" viewBox="0 0 16 16">
+                <path d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+              </svg>
+            </div>
+            <div class=" col-6 text-center">
+
+                     <p class="text">Weather Forecast</p>
+            </div>
+        </div>
+
+        <!--Card contenant les données de Today et Tommorow-->
+
+        <section class="card pt-2 text-center" style="width:100%; height: 30%; background-color: rgb(3, 3, 52);">
+            
+            <div class="row">
+                <div class="col-5 text-right">
+
+                <span class="pt-1" id="today_icon"></span>
+
+                </div>
+                <div class="col-7 text-left">
+
+                    <span id="today" class="pt-1"><strong>Today</strong></span>
+                    <p id="date"></p>
+
+                </div>
+            </div>
+                    <div class="display-3 my-4 text-center">
+                        <span id="today_temp"></span>
+                        <span>&deg;C</span>
+                    </div>
+ 
+
+                <p id="city" class="text-center pt-3"></p>
+
+                 
+               
+               <div class="text-center">
+
+                       <span id="feels"> Feels like </span>
+                       <span>
+                                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="16" fill="currentColor" class="bi bi-dot text-center" viewBox="0 0 10 11">
+                                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                                     </svg>
+                        </span>
+
+                       <span id="sunset"> Sunset </span>
+               </div>
+
+        </section>
+
+        <!--Les barres de navigation-->
+        
+        <div class="navbar navbar-expand justify-content-center pt-5 pb-5 mb-5">
+            <ul class="navbar-nav">
+                <li id="link_today" class="nav-item"><a href="#" class="nav-link">Today</a></li>
+                <li id="link_tomorrow" class="nav-item"><a href="#" class="nav-link">Tomorrow</a></li>
+                <li class="nav-item"><a href="next_7_days.html" class="nav-link" style="color: blue;">Next<strong> 7 days <svg xmlns="http://www.w3.org/2000/svg" width="10" height="12" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 10 14">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                  </svg></strong></a></li>
+            </ul>
+        </div>
+
+        <!--Les prévisions des 6 prochaines heures-->
+
+        <div class="text-center" style="font-size: small;">
+
+            <div class="datacontent">
+                <p id="h11"></p>
+                <p id="h12"></p>
+                <span id="h13"></span>
+                <span>&deg;C</span>
+            </div>
+            <div class="datacontent">
+
+                <p id="h21"></p>
+                <p id="h22"></p>
+                <span id="h23"></span> 
+                <span>&deg;C</span>
+          
+            </div>
+            <div class="datacontent">
+                <p id="h31"></p>
+                <p id="h32"></p>
+                <span id="h33"></span>
+                <span>&deg;C</span> 
+            </div>
+            <div class="datacontent">
+                <p id="h41"></p>
+                <p id="h42"></p>
+                <span id="h43"></span>
+                <span>&deg;C</span> 
+             
+            </div>
+            <div class="datacontent">
+                <p id="h51"></p>
+                <p id="h52"></p>
+                <span id="h53"></span>
+                <span>&deg;C</span> 
+               
+            </div>
+            <div class="datacontent">
+                <p id="h61"></p>
+                <p id="h62"></p>
+                <span id="h63"></span> 
+                <span>&deg;C</span>
+            </div>
+        </div>
+
+        <p class="pt-5"><strong>Chance Of Rain</strong></p>
+
+        <!--LES DIAGRAMMES-->
+          
+         <!--Dessin du graph -->
+        <div class ="diagram">
+            <table>
+                <tr>
+                    <td class="pb-4">sunny</td>
+                    <td width = 150px rowspan = 3>
+                        <div class=myBar>
+                        <div class="w3-container w3-">
+                          <div class="w3-light-grey w3-round-xlarge">
+                            <div id ="pop1" class="w3-container w3-blue w3-round-xlarge"></div>
+                            </div>
+                           </div>
+                        </div>
+                    </td>
+                    <td width = 150px rowspan = 3 >
+                        <div class=myBar>
+                        <div class="w3-container">
+                          <div class="w3-light-grey w3-round-xlarge">
+                            <div id ="pop2" class="w3-container w3-blue w3-round-xlarge"></div>
+                            </div>
+                           </div>
+                        </div>
+                    </td>
+                    <td width = 150px rowspan = 3  >
+                        <div class=myBar>
+                        <div class="w3-container">
+                          <div class="w3-light-grey w3-round-xlarge">
+                            <div id ="pop3"class="w3-container w3-blue w3-round-xlarge"></div>
+                            </div>
+                           </div>
+                        </div>
+                    </td>
+                    <td width = 150px rowspan = 3 >
+                        <div class=myBar>
+                        <div class="w3-container">
+                          <div class="w3-light-grey w3-round-xlarge">
+                            <div id ="pop4" class="w3-container w3-blue w3-round-xlarge"></div>
+                            </div>
+                           </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="pb-4">rainy</td>    
+                </tr>
+                <tr>
+                    <td class="pb-4">heavy <br>rain</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td id="g1">data2</td>
+                    <td id="g2">data2</td>
+                    <td id="g3">data2</td>
+                    <td id="g4">data2</td>
+                </tr>
+            </table>
+        </div> 
+        <style>
+            .diagram,table{
+                display:inline-block;
+                width: 100%;
+                margin-top: 25px;
+            }
+    
+            .myBar{
+                    align-self: center;
+                    display: inline-table;
+                    padding: 0%;
+                    margin: 0%;
+                    transform: rotate(-90deg);     
+             }
+    
+            td{
+                text-align: center;
+             }
+            
+        </style>
+    </div>
+    <script src="js/forecast.js"></script>
+</body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/weather-icons.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Weather Forecast</title>
+
+    <script>
+        /*  Dark and light mode*/
+        var actual_date = new Date();
+        var heure = actual_date.getHours();
+        var container = document.getElementsByClassName('container');
+
+        if(heure > 17 || heure < 7){
+            container.className += 'dark';
+        }
+    </script>
+</head>
+<body>
+    
+    <div class="container mt-5 pt-5">
+
+         <!--En tête, l'Icone et Weather Forecast-->
+        <div class="row">
+            <div id="menu" class=" col-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-filter-left" viewBox="0 0 16 16">
+                <path d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+              </svg>
+            </div>
+            <div class=" col-6">
+
+                     <p class="text-center">Weather Forecast</p>
+            </div>
+        </div>
+
+        <p class="pt-4">
+            <a href="weatherForecast.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+          </svg></a>
+        </p>
+
+        <p class="pt-3 pb-3">
+            Next<strong> 7 days</strong>  
+        </p>
+
+        <section id="Prevision" class="card mb-4" style="width: 100%; height: 20%; border-radius: 8px;">
+             
+            <!--Carte contenant les prévisions de today+1-->
+                
+               <ul class="list-unstyled">
+                   <li class="pt-4">
+                       <div class="row">
+                           <div class="col-6 pl-5">
+                                    <!--Monday and icon-->
+                                        <span id="monday" style="font-weight:bold; font-size: 20px"></span>
+                                        <span id="icon" class="pl-4"></span>
+                           </div>
+                           <div class="col-6">
+                                <!--Temperature-->
+                                <span class="col-6">
+                                    <span id="temperature" class="pl-2" style="font-size: 20px; font-weight: bold;"></span>
+                                    <span style="font-size: 20px; font-weight: bold;">&deg;C</span>
+                                </span>
+                                <span class="col-6">
+                                     <span id="temp19" style="opacity: 0.5;"></span>
+                                     <span style="opacity: 0.5;">&deg;C</span>
+                                </span>
+                           </div>
+                       </div>
+                   </li>
+                   <li class="pt-4">
+                       <div class="row">
+                           <div class="col-6 pl-4">
+                             <!--wind-->
+                             <span class="col-6">
+                                    <span id="wind"></span>
+                             </span>
+                             <span class="col-6">
+                                    <span id="km_h" class="pl-4"></span>
+                             </span>
+                           </div>
+                           <div class="col-6 pl-4">
+                                   <!--Humidity-->
+                                   <span class="col-6">
+                                        <span id="humidity"></span>
+                                   </span>
+                                   <span class="col-6">
+                                        <span id="valeur_hum" class="pl-5" style="opacity: 0.5;"></span>
+                                   </span>  
+                               
+                           </div>
+                       </div>
+                   </li>
+                   <li class="pt-4 mt-3">
+                        <div class="row">
+                            <div class="col-6 pl-4">
+                                    <!--Visibility-->
+                                    <span class="col-6">
+                                        <span id="visibility"></span>
+                                    </span>
+                                    <span class="col-6">
+                                        <span id="km" class="text-right"></span>
+                                    </span>   
+                            </div>
+                            <div class="col-6 pl-4">
+                                    <!--UV-->
+                                    <span class="col-6">
+                                        <span id="uv"></span>
+                                    </span>
+                                    <span class="col-6">
+                                        <span id="uv_1" class="pl-4" style="opacity: 0.5;"></span>
+                                    </span> 
+                            </div>
+                        </div>
+                   </li>
+               </ul>
+        </section>
+
+        <!--List Thursday to sunday-->
+
+        <ul class="list-unstyled">
+            <li class="pt-5">
+                 <!--Grille contenant les données de today+2-->
+                
+                <div class="row">
+                    <div class="col-2">
+                        <p id="tue"></p>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="blue" class="bi bi-cloud-rain" viewBox="0 0 16 16">
+                                <path d="M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 0 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 1 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm.247-6.998a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973zM8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4.002 4.002 0 0 1 8.5 2z"/>
+                              </svg>
+
+                        </span>
+                        <span id="pop1" style="opacity:0.5;"></span>
+                    </div>
+                    <div class="col-2">
+                        <p id="tue_icon">...</p>
+                    </div>
+                    <div class="col-2">
+                        <p id="tue_temp">...</p>
+
+                    </div>
+                    <div class="col-4">
+                       
+                        <div  class="w3-light-grey w3-round-xlarge">
+                            <div id="tue_bar" class="w3-container w3-red w3-round-xlarge"></div>
+                          </div>
+                        
+                    </div> 
+                    <div class="col-2">
+                        <p id="tue_temp2">...</p>
+
+                    </div>
+                </div>
+            </li>
+            <li class="pt-4">
+                 <!--Grille contenant les données météo de today+3-->
+                
+                <div class="row">
+                    <div class="col-2">
+                        <p id="wed"></p>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="blue" class="bi bi-cloud-rain" viewBox="0 0 16 16">
+                                <path d="M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 0 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 1 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm.247-6.998a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973zM8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4.002 4.002 0 0 1 8.5 2z"/>
+                              </svg>
+
+                        </span>
+                        <span id="pop2" style="opacity:0.5;"></span>
+                    </div>
+                    <div class="col-2">
+                        <p id="wed_icon"></p>
+
+                    </div>
+                    <div class="col-2">
+                        <p id="wed_temp"></p>
+                       
+                    </div>
+                    <div class="col-4">
+                        
+                        <div  class="w3-light-grey w3-round-xlarge">
+                            <div id="wed_bar" class="w3-container w3-red w3-round-xlarge"></div>
+                          </div>
+
+                    </div>
+                    <div class="col-2">
+                        <p id="wed_temps2"></p>
+
+                    </div>
+                </div>
+            </li>
+            <li class="pt-4">
+                 <!--Grille contenant les donnnées météo de today+4-->
+                 <div class="row">
+                    <div class="col-2">
+                        <p id="thu"></p>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="blue" class="bi bi-cloud-rain" viewBox="0 0 16 16">
+                                <path d="M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 0 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 1 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm.247-6.998a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973zM8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4.002 4.002 0 0 1 8.5 2z"/>
+                              </svg>
+
+                        </span>
+                        <span id="pop3" style="opacity:0.5;"></span>
+                    </div>
+                    <div class="col-2">
+                        <p id="thu_icon"></p>
+
+                    </div>
+                    <div class="col-2">
+                        <p id="thu_temp"></p>
+
+                    </div>
+                    <div class="col-4">
+                      
+                        <div  class="w3-light-grey w3-round-xlarge">
+                            <div id="thu_bar" class="w3-container w3-red w3-round-xlarge"></div>
+                          </div>
+                    </div>
+                    <div class="col-2">
+                        <p id="thu_temps2"></p>
+               
+            </li>
+            <li class="pt-4">
+                 <!--Grille contenant les données météo de today+5-->
+                 <div class="row">
+                    <div class="col-2">
+                        <p id="fri"></p>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="blue" class="bi bi-cloud-rain" viewBox="0 0 16 16">
+                                <path d="M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 0 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 1 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm.247-6.998a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973zM8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4.002 4.002 0 0 1 8.5 2z"/>
+                              </svg>
+
+                        </span>
+                        <span id="pop4" style="opacity:0.5;"></span>
+                    </div>
+                    <div class="col-2">
+                        <p id="fri_icon"></p>
+
+                    </div>
+                    <div class="col-2">
+                        <p id="fri_temp"></p>
+
+                    </div>
+                    <div class="col-4">
+                        
+                        <div  class="w3-light-grey w3-round-xlarge">
+                            <div id="fri_bar" class="w3-container w3-red w3-round-xlarge"></div>
+                          </div>
+
+                    </div>
+                    <div class="col-2">
+                        <p id="fri_temps2"></p>
+                
+            </li>
+            <li class="pt-4">
+                 <!--Grille contenant les données météo de today+6-->
+                 <div class="row">
+                    <div class="col-2">
+                        <p id="sat"></p>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="blue" class="bi bi-cloud-rain" viewBox="0 0 16 16">
+                                <path d="M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 0 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 1 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm.247-6.998a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973zM8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4.002 4.002 0 0 1 8.5 2z"/>
+                              </svg>
+
+                        </span>
+                        <span id="pop5" style="opacity:0.5;"></span>
+                    </div>
+                    <div class="col-2">
+                        <p id="sat_icon"></p>
+
+                    </div>
+                    <div class="col-2">
+                        <p id="sat_temp"></p>
+
+                    </div>
+                    <div class="col-4">
+                        
+                        <div  class="w3-light-grey w3-round-xlarge">
+                            <div id="sat_bar" class="w3-container w3-red w3-round-xlarge"></div>
+                          </div>
+
+                    </div>
+                    <div class="col-2">
+                        <p id="sat_temps2"></p>
+                
+            </li>
+            <li class="pt-4">
+                 <!--Grille contenant les données météo de today+7-->
+                 <div class="row">
+                    <div class="col-2">
+                        <p id="sun"></p>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="blue" class="bi bi-cloud-rain" viewBox="0 0 16 16">
+                                <path d="M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 0 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 1 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm.247-6.998a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973zM8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4.002 4.002 0 0 1 8.5 2z"/>
+                              </svg>
+
+                        </span>
+                        <span id="pop6" style="opacity:0.5;"></span>
+                    </div>
+                    <div class="col-2">
+                        <p id="sun_icon"></p>
+
+                    </div>
+                    <div class="col-2">
+                        <p id="sun_temp"></p>
+
+                    </div>
+                    <div class="col-4">
+                        
+                        <div  class="w3-light-grey w3-round-xlarge">
+                            <div id="sun_bar" class="w3-container w3-red w3-round-xlarge"></div>
+                          </div>
+                    </div>
+                    <div class="col-2">
+                        <p id="sun_temps2"></p>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+
+        const key = 'cbf5dd1f3da5762e07db424bdae7a442';//Apikey
+
+                let apicall;
+
+                    var loc = navigator.geolocation;
+
+                        if(loc){
+                        loc.getCurrentPosition(position => {
+                            const lat = position.coords.latitude;
+                            const lon = position.coords.longitude;
+                                console.log(lat, lon);
+                            
+                                
+                                                                //API REQUEST
+
+                        const  base = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${key}`;
+
+                        const apiRequest = async() => {
+
+                                apicall = await fetch(base)
+                                .then(res => res.json());
+                                console.log(apicall);
+                                
+                                var day_next7 = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+                                var int_day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+
+                                        var dnext1 = new Date(apicall.daily[1].dt * 1000);
+                                        var dy1 = dnext1.getDay();
+
+                                monday.innerHTML = '<strong>' + int_day[dy1] + '</strong>';
+                                icon.innerHTML = '<img src="http://openweathermap.org/img/w/'+ apicall.daily[1].weather[0].icon + '.png">';
+                                temperature.innerText = Math.round(apicall.daily[1].temp.day);
+                                temp19.innerText = Math.round(apicall.daily[1].temp.min);
+                                wind.innerHTML = '<strong>Wind</strong>';
+                                km_h.innerText = apicall.daily[1].wind_speed + ' m/h';
+                                km_h.style.opacity = 0.5;
+                                humidity.innerHTML = '<strong>Humidity </strong>';
+                                valeur_hum.innerText = apicall.daily[1].humidity;
+                                visibility.innerHTML  = '<strong>Visibility </strong>';
+                                km.innerText = apicall.daily[1].wind_deg + ' km';
+                                km.style.opacity = 0.5;
+                                uv.innerHTML = '<strong>UV </strong>';
+                                uv_1.innerText = apicall.daily[1].uvi;
+                               
+
+
+                                        var dnext2 = new Date(apicall.daily[2].dt * 1000);
+                                        var dy2 = dnext2.getDay();
+
+                                tue.innerText = day_next7[dy2];
+                                pop1.innerHTML = Math.round(apicall.daily[1].pop*100) + '%';
+                                tue_icon.innerHTML = '<img src="http://openweathermap.org/img/w/'+ apicall.daily[2].weather[0].icon + '.png">';
+                                tue_temp.innerHTML = Math.round(apicall.daily[2].temp.min) + '&deg;C';
+                                tue_temp.style.opacity= 0.5;
+                                tue_bar.style.width = apicall.daily[2].temp.day + '%';
+                                tue_bar.innerHTML = Math.round(apicall.daily[2].temp.day) + '&deg;C';
+                                tue_temp2.innerHTML = Math.round(apicall.daily[2].temp.max) + '&deg;C';
+
+                                        var dnext3 = new Date(apicall.daily[3].dt * 1000);
+                                        var dy3 = dnext3.getDay();
+
+                                wed.innerText = day_next7[dy3];
+                                pop2.innerHTML = Math.round(apicall.daily[2].pop*100) + '%';
+                                wed_icon.innerHTML = '<img src="http://openweathermap.org/img/w/'+ apicall.daily[3].weather[0].icon + '.png">';
+                                wed_temp.innerHTML= Math.round(apicall.daily[3].temp.min) + '&deg;C';
+                                wed_temp.style.opacity = 0.5;
+                                wed_bar.style.width = apicall.daily[3].temp.day + '%';
+                                wed_bar.innerHTML = Math.round(apicall.daily[3].temp.day) + '&deg;C';
+                                wed_temps2.innerHTML = Math.round(apicall.daily[3].temp.max) + '&deg;C';
+
+                                        var dnext4 = new Date(apicall.daily[4].dt * 1000);
+                                        var dy4 = dnext4.getDay();
+
+                                thu.innerText = day_next7[dy4];
+                                pop3.innerHTML = Math.round(apicall.daily[3].pop*100) + '%';
+                                thu_icon.innerHTML = '<img src="http://openweathermap.org/img/w/'+ apicall.daily[4].weather[0].icon + '.png">';
+                                thu_temp.innerHTML = Math.round( apicall.daily[4].temp.min) + '&deg;C';
+                                thu_temp.style.opacity = 0.5;
+                                thu_bar.style.width = apicall.daily[4].temp.day + '%';
+                                thu_bar.innerHTML= Math.round(apicall.daily[4].temp.day) + '&deg;C';
+                                thu_temps2.innerHTML = Math.round(apicall.daily[4].temp.max) + '&deg;C';
+
+                                        var dnext5 = new Date(apicall.daily[5].dt * 1000);
+                                        var dy5 = dnext5.getDay();
+
+                                fri.innerText = day_next7[dy5];
+                                pop4.innerHTML = Math.round(apicall.daily[4].pop*100) + '%';
+                                fri_icon.innerHTML = '<img src="http://openweathermap.org/img/w/'+ apicall.daily[5].weather[0].icon + '.png">';
+                                fri_temp.innerHTML = Math.round(apicall.daily[5].temp.min) + '&deg;C';
+                                fri_temp.style.opacity = 0.5;
+                                fri_bar.style.width = apicall.daily[5].temp.day + '%';
+                                fri_bar.innerHTML = Math.round(apicall.daily[5].temp.day) + '&deg;C';
+                                fri_temps2.innerHTML = Math.round(apicall.daily[5].temp.max) + '&deg;C';
+
+                                        var dnext6 = new Date(apicall.daily[6].dt * 1000);
+                                        var dy6 = dnext6.getDay();
+
+                                sat.innerText =  day_next7[dy6];
+                                pop5.innerHTML = Math.round(apicall.daily[5].pop*100) + '%';
+                                sat_icon.innerHTML = '<img src="http://openweathermap.org/img/w/'+ apicall.daily[6].weather[0].icon + '.png">';
+                                sat_temp.innerHTML = Math.round(apicall.daily[6].temp.min) + '&deg;C';
+                                sat_temp.style.opacity = 0.5;
+                                sat_bar.style.width = apicall.daily[6].temp.day + '%';
+                                sat_bar.innerHTML = Math.round(apicall.daily[6].temp.day) + '&deg;C';
+                                sat_temps2.innerHTML = Math.round(apicall.daily[6].temp.max) + '&deg;C';
+
+                                        var dnext7 = new Date(apicall.daily[7].dt * 1000);
+                                        var dy7 = dnext7.getDay();
+
+                                sun.innerText = day_next7[dy7];
+                                pop6.innerHTML = Math.round(apicall.daily[6].pop*100) + '%';
+                                sun_icon.innerHTML = '<img src="http://openweathermap.org/img/w/'+ apicall.daily[7].weather[0].icon + '.png">';
+                                sun_temp.innerHTML = Math.round(apicall.daily[7].temp.min)  + '&deg;C';
+                                sun_temp.style.opacity = 0.5;
+                                sun_bar.style.width = apicall.daily[7].temp.day + '%';
+                                sun_bar.innerHTML = Math.round(apicall.daily[7].temp.day) + '&deg;C';
+                                sun_temps2.innerHTML = Math.round(apicall.daily[7].temp.max)  + '&deg;C';
+
+
+                        };
+
+                                apiRequest();
+                        });
+                        }
+                        else{
+                        alert("Veuillez activer la localisation.");
+                        }
+
+    </script>
+    
+</body>
+</html>

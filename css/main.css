@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+HK&display=swap');
+
+body{
+    font-family: 'Noto Sans HK', sans-serif;
+    background-color: rgba(19, 19, 196, 0.733);
+    
+}
+
+.container{
+    width: 375pt;
+    height: 812pt;
+    border-width: 10px;
+    border-style: solid;
+    border-color: #a6baca;
+    border-radius: 45px;
+    background-color: #e5eaee;
+}
+
+.dark{
+    background-color: #161616;
+    color : #ffffff;
+} 
+
+a{
+    color: black;
+    text-decoration: black;
+
+}
+
+.datacontent{
+
+    display: inline-block;
+    width: 65px;
+    height: 135px;
+    margin: 2px;
+    border-radius: 50px;
+    background-color: rgb(12, 18, 102);
+}
+
+.datacontent:hover
+{
+    color: blue;
+    background-color: white;
+}
+
+#pop1,#pop2,#pop3,#pop4,#pop5,#pop6{
+    font-size: 15px;
+}
